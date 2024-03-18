@@ -1,19 +1,21 @@
 body, html {
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
   }
   #paint {
     position: absolute;
-    top: 50px;
-    bottom: 50px;
     left: 0;
     right: 0;
+    overflow: hidden;
     background-color: #ffffff;
   }
   .toolbar {
     background-color: #072AC8;
-    padding: 20px;
+    padding: 15px;
     color: #EBEBED;
     display: flex;
     justify-content: space-between;
@@ -28,16 +30,17 @@ body, html {
   .toolbar .left-section, .toolbar .right-section {
     display: flex;
   }
+
   .toolbar button {
     background: none;
     border: none;
     color: #EBEBED;
-    font-size: 24px;
+    font-size: 18px;
     cursor: pointer;
     margin-left: 25px;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 37.5px;
+    height: 37.5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,23 +50,30 @@ body, html {
 .toolbar button:hover {
     background-color: #EBEBED;
     color: #072AC8;
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
-  .done-button {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    z-index: 100;
+
+.toolbar button.selected {
+  background-color: #EBEBED;
+  color: #072AC8;
+  transform: scale(1.1); /* Slightly larger to indicate selection */
+}
+
+.done-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
 }
 
 .done-button button {
-    background-color: #212529;
+  background-color: #212529;
     color: #EBEBED;
     border-radius: 50%;
     border: none;
-    width: 60px;
-    height: 60px;
-    font-size: 32px;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
     line-height: 60px;
     text-align: center;
     cursor: pointer;
