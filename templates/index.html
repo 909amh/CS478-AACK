@@ -15,16 +15,28 @@
             </div>
             <div class ="right-section">
                 <!-- Tools -->
-                <button id="pen-tool"> <i class="fa-solid fa-pen"> </i></button>
-                <button id="bucket-tool"> <i class="fa-solid fa-fill"></i> </button>
-                <button id="eraser-tool"> <i class="fa-solid fa-eraser"></i></i> </button>
+                <div class="tool-container" id="pen-tool-container">
+                    <button id="pen-tool"><i class="fa-solid fa-pen"></i></button>
+                    <!-- Pen Size Slider -->
+                    <div class="slider-container">
+                        <input type="range" id="pen-size" min="1" max="100" value="5">
+                    </div>
+                </div>
+                <button id="bucket-tool"><i class="fa-solid fa-fill"></i></button>
+                <div class="tool-container" id="eraser-tool-container">
+                    <button id="eraser-tool"><i class="fa-solid fa-eraser"></i></button>
+                    <!-- Eraser Size Slider -->
+                    <div class="slider-container">
+                        <input type="range" id="eraser-size" min="1" max="100" value="10">
+                    </div>
+                </div>
+                <button id="clear-tool"><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>
+        <!-- Canvas -->
+        <div id="paint"></div>
 
-        <div id="paint">
-            <canvas id="drawing-board"></canvas>
-        </div>
-
+        <!-- Done Button -->
         <div class="done-button">
             <button id="done-button"><i class="fa-solid fa-check"></i></button>
           </div>
