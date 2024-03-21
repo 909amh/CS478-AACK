@@ -65,13 +65,57 @@ document.addEventListener('DOMContentLoaded', function() {
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mouseout', stopDrawing);
     }
-    /*function getPixelData(x,y, color) {
+    function getPixelData(x,y, color) {
+        return ctx.getImageData(x, y, 1, 1).data;
 
     }
-    function activateBucket() {
-
+    function setPixelData(x, y, color) {
+        let fillArea = ctx.createImageData(1, 1);
+        fillArea.data[0] = color[0];
+        fillArea.data[1] = color[1];
+        fillArea.data[2] = color[2];
+        fillArea.data[3] = color[3];
+        ctx.putImageData(fillArea, x, y);
     }
-    */
+    //flood fill algorithm bfs method
+    function floodFill(startX, startY, fillColor){
+        let startColor = getPixelData(startX, startY);
+        if (startColor.every((val, i) => val === fillColor[i]))
+            return;
+        function pixelMatch(x, y){
+            let currentColor = getPixelData(x, y);
+            return currentColor.every((val, i) => val === startColor[i]);
+        }
+
+        let pixelsToCheck = [{x: startX, y: startY}];
+        while (pixelsToCheck. length > 0)
+        {
+            let {x, y} = pixelsToCheck.pop()
+            if (!pixelMatch(x,y))
+                continue;
+            setPixelData(x, y, fillColor);
+
+            [[x - 1, y], 
+            [x + 1, y],
+            [x, y - 1],
+            [x, y + 1]].forEach(([nx, ny]) => {
+                if (nx >= 0 && nx < canvas.width && ny >= 0 && ny < canvas.height)
+                {
+                    pixelsToCheck.push({x: nx, y: ny});
+                }
+            });
+        }
+    }
+    //bucket tool
+    function activateBucket(){
+        function onCanvasClick(e){
+            const mousePos = getMousePos(e);
+            floodFill(Math.floor(mousePos.x), Math.floor(mousePos.y), 
+            [0, 0, 0, 255]);
+        }
+        canvas.addEventListener('click', onCanvasClick);
+    }
+    //clears canvas
     function clearAll(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -100,6 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#eraser-tool-container .slider-container').style.display = 'block';
             activateEraser();
         }
+        else if (tool === 'bucket'){
+            activateBucket();
+        }
+
     
         document.querySelectorAll('.toolbar button').forEach(button => {
             button.classList.remove('selected');
@@ -108,19 +156,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(`${tool}-tool`).classList.add('selected');
     
         activeTool = tool;
-        console.log(`Tool switched. Current active tool: ${activeTool}`);
     }
 
     // Event listeners for tool buttons
-    document.getElementById('pen-tool').addEventListener('click', function() {
-        selectTool('pen');
-    });
-    
-    document.getElementById('eraser-tool').addEventListener('click', function() {
-        selectTool('eraser');
-    });
+    document.getElementById('pen-tool').addEventListener('click', () => selectTool('pen'));
+    document.getElementById('eraser-tool').addEventListener('click', () => selectTool('eraser'));
+    document.getElementById('bucket-tool').addEventListener('click', () => selectTool('bucket'));
     document.getElementById('clear-tool').addEventListener('click', clearAll);
-
+    
     
     //Event listeners for sliders
     penSizeSlider.addEventListener('input', function() {
