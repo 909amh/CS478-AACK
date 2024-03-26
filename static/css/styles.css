@@ -73,7 +73,7 @@ body, html {
   position: absolute;
   top: calc(100% + 20px); /* Adjust this value to position the slider container lower */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-55%);
   background-color: #072AC8;
   padding: 10px;
   width: auto;
