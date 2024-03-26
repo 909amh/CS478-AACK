@@ -1,11 +1,12 @@
 import cv2
+import os
 import numpy as np
 
 class ImageSilhouetter:
     def __init__(self):
         pass
 
-    def silhoutte(self, image: np.ndarray) -> np.ndarray:
+    def silhouette(self, image: np.ndarray) -> np.ndarray:
 
         # Convert the image to gray scale
         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -25,10 +26,16 @@ def main():
     silhouetter = ImageSilhouetter()
 
     # Create a gray scale of the image
-    image = silhouetter.silhoutte(cv2.imread("images/898.png"))
+    image = silhouetter.silhouette(cv2.imread("images/898.png"))
+    directory = "images"
+    for filename in os.listdir(directory):
+        if filename.endswith(".png"):
+            filepath = os.path.join(directory, filename)
+            image = silhouetter.silhouette(cv2.imread(filepath))
+            
+            # Save the silhouette image
+            cv2.imwrite(os.path.join(directory, "silhouette_" + filename), image)
     
-    cv2.imshow('Image',image)
-    cv2.waitKey(0)
 
 
 
