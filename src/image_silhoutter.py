@@ -34,7 +34,10 @@ def main():
             image = silhouetter.silhouette(cv2.imread(filepath))
             
             # Save the silhouette image
-            cv2.imwrite(os.path.join(directory, "silhouette_" + filename), image)
+            if os.path.exists("silhouetted_images") == False:
+                os.mkdir("silhouetted_images")
+    
+            cv2.imwrite(os.path.join("silhouetted_images", "silhouette_" + filename), image)
     
 
 
