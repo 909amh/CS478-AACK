@@ -1,18 +1,22 @@
-<!DOCTYPE html> 
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-        <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
-       
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
-    <h1>Pokénator</h1>
+    <h1>Pokémonator</h1>
+<p>Who's that Pokemon? Draw it and I will identify it!</p>
 
-<button id = "start-button">Start</button>
 
-<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<button onclick= "jumpToAnotherPage()">Start</button>
+<button onclick="showCredits()">Credits</button>
+
+<script>
+    function jumpToAnotherPage() {
+        window.location.href = '/drawings';
+    }
+</script>
 
 </body>
 </html>
