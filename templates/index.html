@@ -7,40 +7,12 @@
         <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
        
     </head>
-    <body>
-        <div class = "toolbar">
-            <div class ="left-section">
-                <!-- Return Bttn-->
-                <button id="return-button"> <i class='fas fa-arrow-left'> </i></button>
-            </div>
-            <div class ="right-section">
-                <!-- Tools -->
-                <div class="tool-container" id="pen-tool-container">
-                    <button id="pen-tool"><i class="fa-solid fa-pen"></i></button>
-                    <!-- Pen Size Slider -->
-                    <div class="slider-container">
-                        <input type="range" id="pen-size" min="1" max="100" value="5">
-                    </div>
-                </div>
-                <button id="bucket-tool"><i class="fa-solid fa-fill"></i></button>
-                <div class="tool-container" id="eraser-tool-container">
-                    <button id="eraser-tool"><i class="fa-solid fa-eraser"></i></button>
-                    <!-- Eraser Size Slider -->
-                    <div class="slider-container">
-                        <input type="range" id="eraser-size" min="1" max="100" value="10">
-                    </div>
-                </div>
-                <button id="clear-tool"><i class="fa-solid fa-trash"></i></button>
-            </div>
-        </div>
-        <!-- Canvas -->
-        <div id="paint"></div>
+<body>
+    <h1>Pokénator</h1>
 
-        <!-- Done Button -->
-        <div class="done-button">
-            <button id="done-button"><i class="fa-solid fa-check"></i></button>
-          </div>
+<button id = "start-button">Start</button>
 
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    </body>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+</body>
 </html>

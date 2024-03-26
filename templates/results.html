@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+        <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--Pending image src paths-->
+        <div class="row">
+            <div class="col-md-5">
+                <h2>User's Drawing</h2>
+                <img id="user-drawing" src="" alt="User Drawing">
+            </div>
+            <div class="col-md-7">
+                <h2 id="pokemon-name">[Pokemon Name]</h2>
+                <img id="ai-guess-image" src="" alt="AI Guess">
+            </div>
+        </div>
+        <div class="feedback-buttons">
+            <button id="correct-guess"><i class="fa-solid fa-check"></i></button></button>
+            <button id="incorrect-guess"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <a href="canvas.html" class="try-again-button">Try Again</a>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </body>
+</html>

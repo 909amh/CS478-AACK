@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    //pen tool
     function activatePen(){
         ctx.globalCompositeOperation = 'source-over';
             ctx.lineWidth = penSizeSlider.value;
@@ -56,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             canvas.addEventListener('mouseout', stopDrawing);
     }
 
+    //eraser tool
     function activateEraser(){
         ctx.globalCompositeOperation = 'destination-out';
             ctx.lineWidth = document.getElementById('eraser-size').value;
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mouseout', stopDrawing);
     }
+    //pixel getter setter 
     function getPixelData(x,y, color) {
         return ctx.getImageData(x, y, 1, 1).data;
 
@@ -77,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fillArea.data[3] = color[3];
         ctx.putImageData(fillArea, x, y);
     }
+
     //flood fill algorithm bfs method
     function floodFill(startX, startY, fillColor){
         let startColor = getPixelData(startX, startY);
@@ -115,11 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         canvas.addEventListener('click', onCanvasClick);
     }
+
     //clears canvas
     function clearAll(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    //deactivates tools 
     function deactivateAllTools() {
         canvas.removeEventListener('mousedown', startDrawing);
         canvas.removeEventListener('mousemove', draw);
@@ -181,5 +187,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize canvas size and set default tool
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    activatePen();
+    activatePen(); //pen default tool
+
+    document.getElementById('done-button').addEventListener('click', function(){
+       // const dataURL = canvas.toDataURL();
+       // localStorage.setItem('userDrawing', dataURL);
+        window.location.href = '/results';
+    })
+
 });
