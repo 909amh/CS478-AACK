@@ -1,34 +1,22 @@
-<!DOCTYPE html> 
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-        <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
-       
-    </head>
-    <body>
-        <div class = "toolbar">
-            <div class ="left-section">
-                <!-- Return Bttn-->
-                <button id="return-button"> <i class='fas fa-arrow-left'> </i></button>
-            </div>
-            <div class ="right-section">
-                <!-- Tools -->
-                <button id="pen-tool"> <i class="fa-solid fa-pen"> </i></button>
-                <button id="bucket-tool"> <i class="fa-solid fa-fill"></i> </button>
-                <button id="eraser-tool"> <i class="fa-solid fa-eraser"></i></i> </button>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Pokémonator</h1>
+<p>Who's that Pokemon? Draw it and I will identify it!</p>
 
-        <div id="paint">
-            <canvas id="drawing-board"></canvas>
-        </div>
 
-        <div class="done-button">
-            <button id="done-button"><i class="fa-solid fa-check"></i></button>
-          </div>
+<button onclick= "jumpToAnotherPage()">Start</button>
+<button onclick="showCredits()">Credits</button>
 
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    </body>
+<script>
+    function jumpToAnotherPage() {
+        window.location.href = '/drawings';
+    }
+</script>
+
+</body>
 </html>
