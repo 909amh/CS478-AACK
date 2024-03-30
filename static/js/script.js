@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //pen tool
     function activatePen(){
+        canvas.removeEventListener('click', onCanvasClick);
         ctx.globalCompositeOperation = 'source-over';
             ctx.lineWidth = penSizeSlider.value;
             ctx.lineCap = "round"
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //eraser tool
     function activateEraser(){
+        canvas.removeEventListener('click', onCanvasClick);
         ctx.globalCompositeOperation = 'destination-out';
             ctx.lineWidth = document.getElementById('eraser-size').value;
             ctx.lineCap = "round"
@@ -83,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //flood fill algorithm bfs method
     function floodFill(startX, startY, fillColor){
+        console.log("Flood fill running")
         let startColor = getPixelData(startX, startY);
         if (startColor.every((val, i) => val === fillColor[i]))
             return;
@@ -110,14 +113,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+    let onCanvasClick;
     //bucket tool
     function activateBucket(){
-        function onCanvasClick(e){
+        onCanvasClick = function(e){
             const mousePos = getMousePos(e);
             floodFill(Math.floor(mousePos.x), Math.floor(mousePos.y), 
             [0, 0, 0, 255]);
         }
         canvas.addEventListener('click', onCanvasClick);
+    }
+
+    function deactivateBucket() {
+        canvas.removeEventListener('click', onCanvasClick);
     }
 
     //clears canvas
@@ -149,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             activatePen();
         } else if (tool === 'eraser') {
             document.querySelector('#eraser-tool-container .slider-container').style.display = 'block';
-            console.log('eraser')
+            console.log('eraser');
             activateEraser();
         }
         else if (tool === 'bucket'){
