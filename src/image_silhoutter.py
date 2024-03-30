@@ -25,8 +25,12 @@ def main():
     # Initialize the ImageSilouetter
     silhouetter = ImageSilhouetter()
 
-    # Create a gray scale of the image
-    image = silhouetter.silhouette(cv2.imread("images/898.png"))
+    # # Silhouette a single image
+    # image = silhouetter.silhouette(cv2.imread("images/001.png"))
+    # cv2.imshow("Silhouette", image)
+    # cv2.waitKey(0)
+
+    
     directory = "images"
     for filename in os.listdir(directory):
         if filename.endswith(".png"):
