@@ -145,12 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (tool === 'pen') {
             document.querySelector('#pen-tool-container .slider-container').style.display = 'block';
+            console.log('pen')
             activatePen();
         } else if (tool === 'eraser') {
             document.querySelector('#eraser-tool-container .slider-container').style.display = 'block';
+            console.log('eraser')
             activateEraser();
         }
         else if (tool === 'bucket'){
+            console.log('bucket')
             activateBucket();
         }
 
