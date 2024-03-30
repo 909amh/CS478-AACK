@@ -14,9 +14,9 @@ app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 def home():
     return render_template('index.html')
 
-@app.route('/drawings')
+@app.route('/canvas')
 def canvas():
-    return render_template('drawings.html')
+    return render_template('canvas.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
