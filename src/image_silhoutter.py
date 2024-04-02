@@ -36,12 +36,16 @@ def main():
         if filename.endswith(".png"):
             filepath = os.path.join(directory, filename)
             image = silhouetter.silhouette(cv2.imread(filepath))
-            
+            image = cv2.resize(image, (256, 256))
             # Save the silhouette image
             if os.path.exists("silhouetted_images") == False:
                 os.mkdir("silhouetted_images")
     
-            cv2.imwrite(os.path.join("silhouetted_images", "silhouette_" + filename), image)
+
+            if (os.path.exists(os.path.join("silhouetted_images/", filename + "/")) == False):
+                path = "silhouetted_images/" + filename + "/"
+                os.mkdir(path)
+                cv2.imwrite(path + filename, image)
     
 
 
