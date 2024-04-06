@@ -205,6 +205,14 @@ document.addEventListener('DOMContentLoaded', function() {
        // const dataURL = canvas.toDataURL();
        // localStorage.setItem('userDrawing', dataURL);
         window.location.href = '/results';
-    })
+    });
 
-});
+    // Random Pokemon Selection
+
+    document.getElementById('random_pokemon').addEventListener('click', function(){
+        var randomNumber = Math.floor(Math.random() * 151) + 1;
+        document.getElementById('pokemon-name').textContent = "Pokemon: " + randomNumber;
+        console.log(randomNumber);
+    });
+
+})

@@ -12,6 +12,7 @@
             <div class ="left-section">
                 <!-- Return Bttn-->
                 <button id="return-button"> <i class='fas fa-arrow-left'> </i></button>
+                <button id="random_pokemon"> <i class = 'fas fa-dice'></i></button>
             </div>
             <div class ="right-section">
                 <!-- Tools -->
@@ -33,13 +34,19 @@
                 <button id="clear-tool"><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>
+        <h1 id="pokemon-name" class="randomly-selected-pokemon">Pokemon Name</h1>
+
         <!-- Canvas -->
         <div id="paint"></div>
+
+        
+    
 
         <!-- Done Button -->
         <div class="done-button">
             <button id="done-button"><i class="fa-solid fa-check"></i></button>
           </div>
+          
 
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
