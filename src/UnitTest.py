@@ -4,7 +4,7 @@ from tensorflow.keras.models import load_model
 import cv2
 import numpy as np
 
-class TestSilhouetter(unittest.TestCase):
+class UnitTesting(unittest.TestCase):
 
     def test_silhouette(self):
         # silhouetter = ImageSilhouetter()
