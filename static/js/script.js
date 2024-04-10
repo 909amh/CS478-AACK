@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var randomNumber = Math.floor(Math.random() * 151) + 1;
         document.getElementById('pokemon-name').textContent = "Pokemon: " + randomNumber;
         console.log(randomNumber);
-        document.getElementById('pokemon-name').textContent = pokemonName;// Update the label
+        document.getElementById('pokemonImage').src = `/static/images/${randomNumber}.png`;
     });
     
 
@@ -244,7 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
       function updateImage() {
         var selectedPokemon = document.getElementById('pokemonSelector').value;
-        var imagePath = `/static/images/pokemon/${selectedPokemon}.png`;
+        var imagePath = `/static/images/${selectedPokemon}.png`;
+        
         document.getElementById('pokemonImage').src = imagePath;
       }
       
