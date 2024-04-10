@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/wired-elements?module"></script>
 </head>
 <body>
-    <h1>Pokémonator</h1>
-<p>Who's that Pokemon? Draw it and I will identify it!</p>
-
-
-<button onclick= "jumpToAnotherPage()">Start</button>
-<button onclick="showCredits()">Credits</button>
-
-<script>
-    function jumpToAnotherPage() {
-        window.location.href = '/canvas';
-    }
-</script>
-
+    <div class="centered-content">
+        <wired-card id="title" elevation="3">
+            <h1>Pokenator</h1>
+            <p>Sketch your favorite Pokemon on our digital canvas and let the AI take a guess!</p>
+            <wired-button elevation = "2" id="start-button">Start</wired-button>
+        </wired-card>
+    </div>
+    
+    <!-- Link to your JavaScript file -->
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 </html>

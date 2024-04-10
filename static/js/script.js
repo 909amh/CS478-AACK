@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const toolbar = document.querySelector('.toolbar');
-    const paintDiv = document.getElementById('paint');
-    const canvas = document.createElement('canvas');
-    const penSizeSlider = document.getElementById('pen-size');
-    const eraserSizeSlider = document.getElementById('eraser-size');
-    canvas.id = 'canvas';
-    paintDiv.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-    let activeTool = 'pen';
+     // Initialize elements and context for drawing
+     const paintDiv = document.getElementById('paint');
+     const canvas = document.createElement('canvas');
+     canvas.id = 'actual-canvas'; // Use a unique ID for the canvas
+     paintDiv.appendChild(canvas);
+     const ctx = canvas.getContext('2d');
+     
+     let isDrawing = false;
+     let activeTool = 'pen';
+     let penSizeSlider = document.querySelector('#pen-tool-container .wired-slider');
+     let eraserSizeSlider = document.querySelector('#eraser-tool-container .wired-slider');
+
+ 
 
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - toolbar.offsetHeight;
-        canvas.style.top = `${toolbar.offsetHeight}px`;
+        const paintDiv = document.getElementById('paint');
+        canvas.width = paintDiv.offsetWidth;
+        canvas.height = paintDiv.offsetHeight;
     }
 
     function getMousePos(evt) {
@@ -62,7 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function activateEraser(){
         canvas.removeEventListener('click', onCanvasClick);
         ctx.globalCompositeOperation = 'destination-out';
-            ctx.lineWidth = document.getElementById('eraser-size').value;
+            let eraserSize = eraserSizeSlider.value; 
+            ctx.lineWidth = eraserSize;
             ctx.lineCap = "round"
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
@@ -181,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('eraser-tool').addEventListener('click', () => selectTool('eraser'));
     document.getElementById('bucket-tool').addEventListener('click', () => selectTool('bucket'));
     document.getElementById('clear-tool').addEventListener('click', clearAll);
+
     
     
     //Event listeners for sliders
@@ -199,12 +204,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize canvas size and set default tool
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    activatePen(); //pen default tool
+    selectTool('pen'); //pen default tool
 
     document.getElementById('done-button').addEventListener('click', function(){
-       // const dataURL = canvas.toDataURL();
-       // localStorage.setItem('userDrawing', dataURL);
-        window.location.href = '/results';
+        const dataURL = canvas.toDataURL('image/png');
+        downloadImage(dataURL, 'Drawing.png');
+
     });
 
     // Random Pokemon Selection
@@ -213,6 +218,43 @@ document.addEventListener('DOMContentLoaded', function() {
         var randomNumber = Math.floor(Math.random() * 151) + 1;
         document.getElementById('pokemon-name').textContent = "Pokemon: " + randomNumber;
         console.log(randomNumber);
+        document.getElementById('pokemon-name').textContent = pokemonName;// Update the label
     });
+    
 
+    function togglePokemonDropdown() {
+        document.getElementById("pokemonDropdown").classList.toggle("show");
+      }
+      
+      function filterPokemon() {
+        var input, filter, a;
+        input = document.getElementById("pokemonSearchInput");
+        filter = input.value.toUpperCase();
+        var dropdown = document.getElementById("pokemonDropdown");
+        a = dropdown.getElementsByTagName("a");
+        for (let i = 0; i < a.length; i++) {
+          let txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+    
+      function updateImage() {
+        var selectedPokemon = document.getElementById('pokemonSelector').value;
+        var imagePath = `/static/images/pokemon/${selectedPokemon}.png`;
+        document.getElementById('pokemonImage').src = imagePath;
+      }
+      
+      function downloadImage(dataURL, filename) {
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      
 })

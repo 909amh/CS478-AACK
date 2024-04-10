@@ -5,49 +5,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
         <script src="https://kit.fontawesome.com/7b8fddeffe.js" crossorigin="anonymous"></script>
-       
+        <script type="module" src="https://unpkg.com/wired-elements?module"></script>
     </head>
     <body>
-        <div class = "toolbar">
-            <div class ="left-section">
-                <!-- Return Bttn-->
-                <button id="return-button"> <i class='fas fa-arrow-left'> </i></button>
-                <button id="random_pokemon"> <i class = 'fas fa-dice'></i></button>
-            </div>
-            <div class ="right-section">
-                <!-- Tools -->
-                <div class="tool-container" id="pen-tool-container">
-                    <button id="pen-tool"><i class="fa-solid fa-pen"></i></button>
-                    <!-- Pen Size Slider -->
-                    <div class="slider-container">
-                        <input type="range" id="pen-size" min="1" max="100" value="5">
-                    </div>
+        <div id="toolbar">
+                <div class="left-section">
+                    <wired-button id="return-button" class="tool-btn"><i class='fas fa-arrow-left'></i></wired-button>
+                    <wired-combo id="pokemon-selector">
+                        <wired-input placeholder="Search..." id="pokemonSearchInput"></wired-input>
+                        <wired-item value="001">Bulbasaur</wired-item>
+                        <!-- wired-items will be dynamically populated -->
+                    </wired-combo>
+                    <wired-button id="random_pokemon"><i class="fas fa-random"></i></button>
                 </div>
-                <button id="bucket-tool"><i class="fa-solid fa-fill"></i></button>
-                <div class="tool-container" id="eraser-tool-container">
-                    <button id="eraser-tool"><i class="fa-solid fa-eraser"></i></button>
-                    <!-- Eraser Size Slider -->
-                    <div class="slider-container">
-                        <input type="range" id="eraser-size" min="1" max="100" value="10">
-                    </div>
-                </div>
-                <button id="clear-tool"><i class="fa-solid fa-trash"></i></button>
-            </div>
-        </div>
-        <h1 id="pokemon-name" class="randomly-selected-pokemon">Pokemon Name</h1>
-
-        <!-- Canvas -->
-        <div id="paint"></div>
-
-        
     
-
-        <!-- Done Button -->
-        <div class="done-button">
-            <button id="done-button"><i class="fa-solid fa-check"></i></button>
-          </div>
-          
-
+                <!-- Right Section: Drawing Tools -->
+                <div class="right-section">
+                    <div class="tool-container" id="pen-tool-container">
+                        <wired-button id="pen-tool" class="tool-btn"><i class="fa-solid fa-pen"></i></wired-button>
+                        <div id="pen-size-slider" class="slider-container">
+                            <wired-slider min="1" max="100" value="5" class="wired-slider"></wired-slider>
+                        </div>
+                    </div>
+                    <wired-button id="bucket-tool" class="tool-btn"><i class="fa-solid fa-fill"></i></wired-button>
+                    <div class="tool-container" id="eraser-tool-container">
+                        <wired-button id="eraser-tool" class="tool-btn"><i class="fa-solid fa-eraser"></i></wired-button>
+                        <div id="eraser-size-slider" class="slider-container">
+                            <wired-slider min="1" max="100" value="10" class="wired-slider"></wired-slider>
+                        </div>
+                    </div>
+                    <wired-button id="clear-tool" class="tool-btn"><i class="fa-solid fa-trash"></i></wired-button>
+                </div>
+            </div>
+    
+        <!-- Canvas and Image Display Here -->
+        <div class="main-content">
+            <!-- Image Display -->
+            <div id="image-container">
+                <wired-image id="pokemonImage" src="{{ url_for('static', filename='images/119.png') }}" alt="Selected Pokemon" elevation ="3"></wired-image>
+                <!-- Label for displaying the Pokémon's name -->
+                <div class="pokemon-name-label" id="pokemon-name">Name of the Pokémon</div>
+                <!-- Done Button -->
+                <wired-button id="done-button" elevation="2">Done</wired-button>
+            </div>
+            <!-- Canvas for drawing -->
+            <div id="paint"></div>
+        </div>
+        
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
 </html>
