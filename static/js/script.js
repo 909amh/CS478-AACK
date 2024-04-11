@@ -208,7 +208,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('done-button').addEventListener('click', function(){
         const dataURL = canvas.toDataURL('image/png');
-        downloadImage(dataURL, 'Drawing.png');
+
+        fetch('/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({dataURL: dataURL}),
+            }).then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                document.getElementById('pokemon-name').textContent = "Pokemon: " + data;
+            })
 
     });
 
