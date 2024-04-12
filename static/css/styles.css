@@ -77,9 +77,9 @@ body, html {
 /* Main content area beneath the toolbar */
 .main-content {
   display: flex;
-  padding-top: 80px; /* space for toolbar */
+  padding-top: 80px;
   margin: 20px;
-  height: calc(100% - 80px); /* adjust height considering toolbar */
+  height: calc(100% - 80px); 
   box-sizing: border-box;
   justify-content: space-between;
   gap: 10px;
@@ -87,45 +87,46 @@ body, html {
 
 /* Flex containers for the image and drawing canvas */
 #image-container {
-  flex: 0 0 30%; /* Adjust width as needed, flex-basis set to 30% */
+  flex: 0 0 30%; 
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
-  justify-content: space-between; /* Even spacing */
+  flex-direction: column; 
+  align-items: center;
+  justify-content: space-between; 
   border-right: 2px solid black;
   overflow: hidden;
 }
 .pokemon-name-label {
   text-align: center;
   font-size: 1.5rem;
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px;
 }
 
 #done-button {
   align-self: center;
-  margin-top: auto; /* pushes the button to the bottom */
+  margin-top: auto; 
   font-size: 50;
 }
 #paint {
-  flex: 1;
   position: relative;
   border: 2px solid black;
   overflow: hidden;
+  width: 256px;
+  height: 256px;
 }
 
 #canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* full width of its container */
-  height: 100%; /* full height of its container */
-  border: 2px solid black;
+  width: 256px;
+  height: 256px;
+  border: 5px solid black;
   overflow: hidden;
 }
 
 /* Styling for the search input within the toolbar */
 #pokemonSearchInput {
-    margin-right: 5px; /* Space after search input */
+    margin-right: 5px;
 }
 
 /* Additional interactive element styles */
@@ -136,17 +137,16 @@ wired-button:hover {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .right-section {
-        flex-wrap: wrap; /* Allow tool buttons to wrap on smaller screens */
+        flex-wrap: wrap; 
     }
     
     .tool-btn {
-        flex-basis: 100%; /* Full width on smaller screens */
+        flex-basis: 100%; 
     }
 
     .slider-container {
-        position: static; /* Sliders become part of the flow on smaller screens */
-        width: auto; /* Adjust width as needed */
-        margin-top: 5px; /* Space above sliders */
+        position: static; 
+        width: auto; 
+        margin-top: 5px; 
     }
 }
-
