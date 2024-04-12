@@ -6,6 +6,7 @@ import tensorflow as tf
 import numpy as np
 from keras.preprocessing import image as image_utils
 from PIL import Image
+from model import Pokemon
 from io import BytesIO
 
 #Root Project Directory Path
@@ -48,7 +49,10 @@ def predict():
     image = np.expand_dims(image, axis=0)
 
     prediction = model.predict(image)
-    return str(prediction)
+    predicted_class = np.argmax(prediction)
+    predicted_class_name = Pokemon(predicted_class)
+    print(predicted_class_name)
+    return str(predicted_class_name.name)
 
 
 if __name__ == '__main__':

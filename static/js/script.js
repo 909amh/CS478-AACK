@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(response => response.text())
             .then(data => {
                 console.log('Success:', data);
-                document.getElementById('pokemon-name').textContent = "Pokemon: " + data;
+                document.getElementById('pokemon-name').textContent = "Prediction: " + data;
             })
 
     });
