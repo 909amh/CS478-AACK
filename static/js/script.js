@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize elements and context for drawing
+    const pokemonSelector = document.getElementById('pokemon-selector');
+
     const paintDiv = document.getElementById('paint');
     const canvas = document.createElement('canvas');
     canvas.id = 'actual-canvas'; // Use a unique ID for the canvas
@@ -67,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
        ctx.globalCompositeOperation = 'destination-out';
            let eraserSize = eraserSizeSlider.value; 
            ctx.lineWidth = eraserSize;
-           ctx.lineCap = "round"
-           ctx.lineJoin = "round"
+           ctx.lineCap = "round";
+           ctx.lineJoin = "round";
            canvas.addEventListener('mousedown', startDrawing);
            canvas.addEventListener('mousemove', draw);
            canvas.addEventListener('mouseup', stopDrawing);
@@ -233,33 +235,37 @@ document.addEventListener('DOMContentLoaded', function() {
        document.getElementById('pokemonImage').src = `/static/images/${randomNumber}.png`;
    });
    
+// Fetch Pokémon data from the API
+fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+  .then(response => response.json())
+  .then(data => {
+    const pokemonSelector = document.getElementById('pokemon-selector');
 
-   function togglePokemonDropdown() {
-       document.getElementById("pokemonDropdown").classList.toggle("show");
-     }
-     
-     function filterPokemon() {
-       var input, filter, a;
-       input = document.getElementById("pokemonSearchInput");
-       filter = input.value.toUpperCase();
-       var dropdown = document.getElementById("pokemonDropdown");
-       a = dropdown.getElementsByTagName("a");
-       for (let i = 0; i < a.length; i++) {
-         let txtValue = a[i].textContent || a[i].innerText;
-         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-           a[i].style.display = "";
-         } else {
-           a[i].style.display = "none";
-         }
-       }
-     }
-   
-     function updateImage() {
-       var selectedPokemon = document.getElementById('pokemonSelector').value;
-       var imagePath = `/static/images/${selectedPokemon}.png`;
-       
-       document.getElementById('pokemonImage').src = imagePath;
-     }
+    // Create a wired-item for each Pokémon and add it to the wired-combo
+    data.results.forEach((pokemon, index) => {
+      const item = document.createElement('wired-item');
+      item.value = String(index + 1); // Pokémon ID
+      item.textContent = pokemon.name; // Pokémon name
+      pokemonSelector.appendChild(item);
+    });
+
+    // Add an event listener to the wired-combo that updates the image when the selection changes
+    pokemonSelector.addEventListener('selected', () => {
+        const selectedPokemon = pokemonSelector.selected;
+        const img = document.getElementById('pokemonImage');
+        img.src = `/static/images/${selectedPokemon}.png`;
+        img.onload = () => console.log('Image loaded successfully');
+        img.onerror = () => console.log('Error loading image');
+    });
+  });
+
+   // Update the image when the selection changes
+  function updateImage() {
+    var selectedPokemon = document.getElementById('pokemonSelector').value;
+    var imagePath = `/static/images/${selectedPokemon}.png`;
+    
+    document.getElementById('pokemonImage').src = imagePath;
+ }
      
      function downloadImage(dataURL, filename) {
        const a = document.createElement('a');

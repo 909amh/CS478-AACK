@@ -8,7 +8,6 @@ body, html {
     font-family: 'Gaegu', cursive;
 }
 
-/* Index Page */
 .centered-content {
   text-align: center; 
   display: flex;
@@ -17,37 +16,33 @@ body, html {
   justify-content: center;
   height: 100vh;
   padding: 60px;
-  gap: -50px;
-  background: url('../svg/border.svg') no-repeat center center;
-  background-size: contain; 
 }
 
 .centered-content h1 {
   font-size: 100px;
 }
+
 .centered-content p{
   font-size: 30px;
   overflow-wrap: break-word;
-  word-break: break-all;
-}
-.centered-content h1, .centered-content p, .centered-content button {
-  min-height: 50px;
 }
 
- /* Canvas */
+.centered-content button {
+  font-size: 2.0rem;
+}
 
-/* Toolbar styles */
 #toolbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    background-color: #eee;
-    z-index: 10;
-    border-bottom: 4px solid #1f1e1e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  background-color: #eee;
+  z-index: 10;
+  border-bottom: 4px solid #1f1e1e;
+  width: 100%;
+  height: 5%;
 }
 
 .left-section, .right-section {
@@ -56,97 +51,88 @@ body, html {
 }
 
 .tool-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 25px; /* Space between buttons */
+    margin-right: 25px;
+    font-size: 1.2em;
+    padding: 10px;
 }
-/* Styling for dropdown and slider containers */
+
 .slider-container {
-  position: absolute; /* Position them directly below the tool buttons */
-  padding: 5px; /* Padding around sliders */
-  border-radius: 5px; /* Rounded corners for sliders */
-  z-index: 20;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.wired-slider {
-  display: block; /* This ensures that sliders are not hidden */
-  /* Additional styles for the slider */
-}
-
-/* Main content area beneath the toolbar */
 .main-content {
   display: flex;
   padding-top: 80px;
   margin: 20px;
-  height: calc(100% - 80px); 
-  box-sizing: border-box;
+  height: calc(100% - 80px);
   justify-content: space-between;
   gap: 10px;
 }
 
-/* Flex containers for the image and drawing canvas */
 #image-container {
-  flex: 0 0 30%; 
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  justify-content: space-between; 
+  flex: 0 0 30%;
   border-right: 2px solid black;
-  overflow: hidden;
 }
+
 .pokemon-name-label {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-top: 10px;
 }
 
-#done-button {
-  align-self: center;
-  margin-top: auto; 
-  font-size: 50;
-}
-#paint {
-  position: relative;
+#paint, #canvas {
   border: 2px solid black;
-  overflow: hidden;
   width: 256px;
   height: 256px;
 }
 
-#canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 256px;
-  height: 256px;
-  border: 5px solid black;
-  overflow: hidden;
+#pokemon-selector {
+  --wired-item-selected-bg: lightgray;
+  --wired-item-selected-color: black;
 }
-
-/* Styling for the search input within the toolbar */
-#pokemonSearchInput {
-    margin-right: 5px;
+.scrollable {
+  overflow-y: auto;
+  height: 200px;
 }
-
-/* Additional interactive element styles */
-wired-button:hover {
-    background-color: #71787c; /* Hover state */
-}
-
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+    .tool-btn {
+        font-size: 1em;
+        padding: 8px;
+        margin-right: 20px;
+    }
+    
+    .slider-container {
+        width: auto;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        transform: none;
+    }
+}
+
 @media (max-width: 768px) {
-    .right-section {
-        flex-wrap: wrap; 
+    #toolbar {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .left-section, .right-section {
+        flex-direction: column;
+        align-items: stretch;
     }
     
     .tool-btn {
-        flex-basis: 100%; 
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 
     .slider-container {
-        position: static; 
-        width: auto; 
-        margin-top: 5px; 
+        position: static;
+        transform: none;
+        margin: 10px auto;
     }
 }
