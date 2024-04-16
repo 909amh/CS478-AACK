@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
     let activeTool = 'pen';
+    var cPushArray = new Array();
+    var cStep = -1;
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -206,5 +208,33 @@ document.addEventListener('DOMContentLoaded', function() {
        // localStorage.setItem('userDrawing', dataURL);
         window.location.href = '/results';
     })
-
+    // Undo Button
+    function cPush(){
+        cStep++;
+        if (cStep < cPushArray.length)
+        {
+            cPushArray.length = cStep;
+        }
+        cPushArray.push(document.getElementById('canvas'))
+    }
+    function cUndo() {
+        if (cStep > 0){
+            cStep--;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
+    function cRedo(){
+        if (cStep < cPushArray.length-1){
+            cStep++;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
 });

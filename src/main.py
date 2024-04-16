@@ -18,5 +18,9 @@ def home():
 def canvas():
     return render_template('canvas.html')
 
+@app.route('/select')
+def select():
+    return render_template('select.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
