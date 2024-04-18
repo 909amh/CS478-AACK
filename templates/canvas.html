@@ -11,12 +11,8 @@
         <div id="toolbar">
                 <div class="left-section">
                     <wired-button id="return-button" class="tool-btn"><i class='fas fa-arrow-left'></i></wired-button>
-                    <wired-combo id="pokemon-selector">
-                        <wired-input placeholder="Search..." id="pokemonSearchInput"></wired-input>
-                        <wired-item value="001">Bulbasaur</wired-item>
-                        <!-- wired-items will be dynamically populated -->
-                    </wired-combo>
-                    <wired-button id="random_pokemon"><i class="fas fa-random"></i></button>
+                    <wired-combo id="pokemon-selector"></wired-combo>
+                    <wired-button id="random_pokemon" class="tool-btn" ><i class="fas fa-random"></i></button>
                 </div>
     
                 <!-- Right Section: Drawing Tools -->
@@ -42,9 +38,9 @@
         <div class="main-content">
             <!-- Image Display -->
             <div id="image-container">
-                <wired-image id="pokemonImage" src="{{ url_for('static', filename='images/119.png') }}" alt="Selected Pokemon" elevation ="3"></wired-image>
+                <img id="pokemonImage" src="{{ url_for('static', filename='images/119.png') }}" alt="Selected Pokemon" elevation ="3" width="480" height="480"></img>
                 <!-- Label for displaying the Pokémon's name -->
-                <div class="pokemon-name-label" id="pokemon-name">Name of the Pokémon</div>
+                <div class="pokemon-name-label" id="pokemon-name">Name of the Pokemon</div>
                 <!-- Done Button -->
                 <wired-button id="done-button" elevation="2">Done</wired-button>
             </div>
