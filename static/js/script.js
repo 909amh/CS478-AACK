@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
      let eraserSizeSlider = document.querySelector('#eraser-tool-container .wired-slider');
 
  
+    var cPushArray = new Array();
+    var cStep = -1;
 
     function resizeCanvas() {
         const paintDiv = document.getElementById('paint');
@@ -207,10 +209,43 @@ document.addEventListener('DOMContentLoaded', function() {
     selectTool('pen'); //pen default tool
 
     document.getElementById('done-button').addEventListener('click', function(){
+       // const dataURL = canvas.toDataURL();
+       // localStorage.setItem('userDrawing', dataURL);
+        window.location.href = '/results';
+    })
+    // Undo Button
+    function cPush(){
+        cStep++;
+        if (cStep < cPushArray.length)
+        {
+            cPushArray.length = cStep;
+        }
+        cPushArray.push(document.getElementById('canvas'))
+    }
+    function cUndo() {
+        if (cStep > 0){
+            cStep--;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
+    function cRedo(){
+        if (cStep < cPushArray.length-1){
+            cStep++;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
+});
         const dataURL = canvas.toDataURL('image/png');
         downloadImage(dataURL, 'Drawing.png');
 
-    });
 
     // Random Pokemon Selection
 
@@ -256,5 +291,3 @@ document.addEventListener('DOMContentLoaded', function() {
         a.click();
         document.body.removeChild(a);
       }
-      
-})
