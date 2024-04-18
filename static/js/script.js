@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    //flood fill algorithm bfs method
    function floodFill(startX, startY, fillColor){
+       cPush();
        console.log("Flood fill running")
        let startColor = getPixelData(startX, startY);
        if (startColor.every((val, i) => val === fillColor[i]))
@@ -161,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
    //bucket tool
    function activateBucket(){
        onCanvasClick = function(e){
-           cPush();
            const mousePos = getMousePos(e);
            floodFill(Math.floor(mousePos.x), Math.floor(mousePos.y), 
            [0, 0, 0, 255]);

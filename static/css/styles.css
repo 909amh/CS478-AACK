@@ -64,16 +64,25 @@ body, html {
 
 .main-content {
   display: flex;
-  padding-top: 80px;
-  margin: 20px;
-  height: calc(100% - 80px);
-  justify-content: space-between;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  gap: 75px;
+  margin: 0 auto;
+  max-width: 960px;
+  height: calc(100% - 60px);
+  
+
 }
 
 #image-container {
-  flex: 0 0 30%;
-  border-right: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  padding: 20px;
+  border: 2px solid black;
 }
 
 .pokemon-name-label {
@@ -82,10 +91,19 @@ body, html {
   margin-top: 10px;
 }
 
-#paint, #canvas {
+#paint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
   border: 2px solid black;
   width: 256px;
   height: 256px;
+}
+
+#actual-canvas {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #pokemon-selector {

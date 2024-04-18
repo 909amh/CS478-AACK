@@ -40,15 +40,15 @@
         <div class="main-content">
             <!-- Image Display -->
             <div id="image-container">
-                <img id="pokemonImage" src="{{ url_for('static', filename='images/119.png') }}" alt="Selected Pokemon" elevation ="3" width="480" height="480"></img>
+                <img id="pokemonImage" src="{{ url_for('static', filename='images/119.png') }}" alt="Selected Pokemon" elevation ="3" width="256" height="256"></img>
                 <!-- Label for displaying the Pokémon's name -->
                 <div class="pokemon-name-label" id="pokemon-name">Name of the Pokemon</div>
-                <!-- Done Button -->
-                <wired-button id="done-button" elevation="2">Done</wired-button>
-            </div>
+            </div> 
             <!-- Canvas for drawing -->
             <div id="paint"></div>
         </div>
+        <!-- Done Button -->
+        <wired-button id="done-button" elevation="2">Done</wired-button>
         
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
