@@ -1,105 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    width: 100%;
     height: 100%;
-  }
-  #paint {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-    background-color: #ffffff;
-  }
-  .toolbar {
-    background-color: #072AC8;
-    padding: 15px;
-    color: #EBEBED;
+    background: #f8f9fa;
+    font-family: 'Gaegu', cursive;
+}
+
+/* Index Page */
+.centered-content {
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  height: 100vh;
+  padding: 60px;
+  gap: -50px;
+  background: url('../svg/border.svg') no-repeat center center;
+  background-size: contain; 
+}
+
+.centered-content h1 {
+  font-size: 100px;
+}
+.centered-content p{
+  font-size: 30px;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+.centered-content h1, .centered-content p, .centered-content button {
+  min-height: 50px;
+}
+
+ /* Canvas */
+
+/* Toolbar styles */
+#toolbar {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-  }
- 
-  .toolbar .left-section, .toolbar .right-section {
-    display: flex;
-  }
+    background-color: #eee;
+    z-index: 10;
+    border-bottom: 4px solid #1f1e1e;
+}
 
-  .toolbar button {
-    background: none;
-    border: none;
-    color: #EBEBED;
-    font-size: 18px;
-    cursor: pointer;
-    margin-left: 25px;
-    border-radius: 50%;
-    width: 37.5px;
-    height: 37.5px;
+.left-section, .right-section {
+    display: flex;
+    align-items: center;
+}
+
+.tool-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition-duration: 0.4s;
-    transform: none;
+    margin-right: 25px; /* Space between buttons */
 }
-
-.toolbar button:hover {
-    background-color: #EBEBED;
-    color: #072AC8;
-    transform: scale(1.15);
-}
-
-.toolbar button.selected {
-  background-color: #EBEBED;
-  color: #072AC8;
-  transform: scale(1.1); 
-}
-
-.tool-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* Styling for dropdown and slider containers */
 .slider-container {
-  display: none;
+  position: absolute; /* Position them directly below the tool buttons */
+  padding: 5px; /* Padding around sliders */
+  border-radius: 5px; /* Rounded corners for sliders */
+  z-index: 20;
+}
+
+.wired-slider {
+  display: block; /* This ensures that sliders are not hidden */
+  /* Additional styles for the slider */
+}
+
+/* Main content area beneath the toolbar */
+.main-content {
+  display: flex;
+  padding-top: 80px; /* space for toolbar */
+  margin: 20px;
+  height: calc(100% - 80px); /* adjust height considering toolbar */
+  box-sizing: border-box;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Flex containers for the image and drawing canvas */
+#image-container {
+  flex: 0 0 30%; /* Adjust width as needed, flex-basis set to 30% */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: space-between; /* Even spacing */
+  border-right: 2px solid black;
+  overflow: hidden;
+}
+.pokemon-name-label {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 10px; /* Adjust as needed */
+}
+
+#done-button {
+  align-self: center;
+  margin-top: auto; /* pushes the button to the bottom */
+  font-size: 50;
+}
+#paint {
+  flex: 1;
+  position: relative;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+#canvas {
   position: absolute;
-  top: calc(100% + 20px); /* Adjust this value to position the slider container lower */
-  left: 50%;
-  transform: translateX(-55%);
-  background-color: #072AC8;
-  padding: 10px;
-  width: auto;
-  z-index: 10;
-  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 100%; /* full width of its container */
+  height: 100%; /* full height of its container */
+  border: 2px solid black;
+  overflow: hidden;
 }
 
-.done-button {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 100;
+/* Styling for the search input within the toolbar */
+#pokemonSearchInput {
+    margin-right: 5px; /* Space after search input */
 }
 
-.done-button button {
-  background-color: #212529;
-    color: #EBEBED;
-    border-radius: 50%;
-    border: none;
-    width: 45px;
-    height: 45px;
-    font-size: 24px;
-    line-height: 60px;
-    text-align: center;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Additional interactive element styles */
+wired-button:hover {
+    background-color: #71787c; /* Hover state */
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .right-section {
+        flex-wrap: wrap; /* Allow tool buttons to wrap on smaller screens */
+    }
+    
+    .tool-btn {
+        flex-basis: 100%; /* Full width on smaller screens */
+    }
+
+    .slider-container {
+        position: static; /* Sliders become part of the flow on smaller screens */
+        width: auto; /* Adjust width as needed */
+        margin-top: 5px; /* Space above sliders */
+    }
+}
+
