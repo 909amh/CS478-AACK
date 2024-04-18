@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
    //bucket tool
    function activateBucket(){
        onCanvasClick = function(e){
+           cPush();
            const mousePos = getMousePos(e);
            floodFill(Math.floor(mousePos.x), Math.floor(mousePos.y), 
            [0, 0, 0, 255]);
@@ -288,8 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
      item.textContent = pokemon.name + "\n"; // Pokémon name
      pokemonSelector.appendChild(item);
      });
-
- // pokemonSelector.requestUpdate();
 
      // Add an event listener to the wired-combo that updates the image when the selection changes
      pokemonSelector.addEventListener('selected', () => {
