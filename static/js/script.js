@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
        canvas.removeEventListener('click', onCanvasClick);
        ctx.globalCompositeOperation = 'source-over';
            ctx.lineWidth = penSizeSlider.value;
-           ctx.lineCap = "round"
+           ctx.lineCap = "round";
+           ctx.lineJoin = "round";
            ctx.strokeStyle = '#000000';
            canvas.addEventListener('mousedown', startDrawing);
            canvas.addEventListener('mousemove', draw);
