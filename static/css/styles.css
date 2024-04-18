@@ -89,6 +89,8 @@ body, html {
 }
 
 #pokemon-selector {
+  display: flex;
+  flex-direction: column;
   --wired-item-selected-bg: lightgray;
   --wired-item-selected-color: black;
 }

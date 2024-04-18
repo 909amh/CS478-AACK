@@ -55,5 +55,9 @@ def predict():
     return str(predicted_class_name.name)
 
 
+@app.route('/select')
+def select():
+    return render_template('select.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

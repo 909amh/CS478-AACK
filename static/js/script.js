@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let penSizeSlider = document.querySelector('#pen-tool-container .wired-slider');
     let eraserSizeSlider = document.querySelector('#eraser-tool-container .wired-slider');
 
-
+ 
+    var cPushArray = new Array();
+    var cStep = -1;
 
    function resizeCanvas() {
        const paintDiv = document.getElementById('paint');
@@ -224,8 +226,41 @@ document.addEventListener('DOMContentLoaded', function() {
                console.log('Success:', data);
                document.getElementById('pokemon-name').textContent = "Prediction: " + data;
            })
+    document.getElementById('done-button').addEventListener('click', function(){
+       
+    })
+    // Undo Button
+    function cPush(){
+        cStep++;
+        if (cStep < cPushArray.length)
+        {
+            cPushArray.length = cStep;
+        }
+        cPushArray.push(document.getElementById('canvas'))
+    }
+    function cUndo() {
+        if (cStep > 0){
+            cStep--;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
+    function cRedo(){
+        if (cStep < cPushArray.length-1){
+            cStep++;
+            var canvasPic = new Image();
+            canvasPic.src = cPushArray[cStep];
+            canvasPic.onload = function () {
+                ctx.drawImage(canvasPic, 0, 0);
+            }
+        }
+    }
 
-   });
+    })
+});
 
    // Random Pokemon Selection
 
@@ -237,27 +272,29 @@ document.addEventListener('DOMContentLoaded', function() {
    });
    
 // Fetch Pokémon data from the API
-fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-  .then(response => response.json())
-  .then(data => {
-    const pokemonSelector = document.getElementById('pokemon-selector');
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    .then(response => response.json())
+    .then(data => {
+        const pokemonSelector = document.getElementById('pokemon-selector');
 
-    // Create a wired-item for each Pokémon and add it to the wired-combo
-    data.results.forEach((pokemon, index) => {
-      const item = document.createElement('wired-item');
-      item.value = String(index + 1); // Pokémon ID
-      item.textContent = pokemon.name; // Pokémon name
-      pokemonSelector.appendChild(item);
-    });
+        // Create a wired-item for each Pokémon and add it to the wired-combo
+        data.results.forEach((pokemon, index) => {
+        const item = document.createElement('label');
+        item.value = String(index + 1); // Pokémon ID
+        item.textContent = pokemon.name + "\n"; // Pokémon name
+        pokemonSelector.appendChild(item);
+        });
 
-    // Add an event listener to the wired-combo that updates the image when the selection changes
-    pokemonSelector.addEventListener('selected', () => {
-        const selectedPokemon = pokemonSelector.selected;
-        const img = document.getElementById('pokemonImage');
-        img.src = `/static/images/${selectedPokemon}.png`;
-        img.onload = () => console.log('Image loaded successfully');
-        img.onerror = () => console.log('Error loading image');
-    });
+    // pokemonSelector.requestUpdate();
+
+        // Add an event listener to the wired-combo that updates the image when the selection changes
+        pokemonSelector.addEventListener('selected', () => {
+            const selectedPokemon = pokemonSelector.selected;
+            const img = document.getElementById('pokemonImage');
+            img.src = `/static/images/${selectedPokemon}.png`;
+            img.onload = () => console.log('Image loaded successfully');
+            img.onerror = () => console.log('Error loading image');
+        });
   });
 
    // Update the image when the selection changes
@@ -277,4 +314,46 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
        document.body.removeChild(a);
      }
      
-})
+
+    document.getElementById('random_pokemon').addEventListener('click', function(){
+        var randomNumber = Math.floor(Math.random() * 151) + 1;
+        document.getElementById('pokemon-name').textContent = "Pokemon: " + randomNumber;
+        console.log(randomNumber);
+        document.getElementById('pokemon-name').textContent = pokemonName;// Update the label
+    });
+    
+
+    function togglePokemonDropdown() {
+        document.getElementById("pokemonDropdown").classList.toggle("show");
+      }
+      
+      function filterPokemon() {
+        var input, filter, a;
+        input = document.getElementById("pokemonSearchInput");
+        filter = input.value.toUpperCase();
+        var dropdown = document.getElementById("pokemonDropdown");
+        a = dropdown.getElementsByTagName("a");
+        for (let i = 0; i < a.length; i++) {
+          let txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+    
+      function updateImage() {
+        var selectedPokemon = document.getElementById('pokemonSelector').value;
+        var imagePath = `/static/images/pokemon/${selectedPokemon}.png`;
+        document.getElementById('pokemonImage').src = imagePath;
+      }
+      
+      function downloadImage(dataURL, filename) {
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
