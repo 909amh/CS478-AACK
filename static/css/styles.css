@@ -1,35 +1,43 @@
+/* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');
 
+/* Resetting default styles and setting up font*/
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #f8f9fa;
-    font-family: 'Gaegu', cursive;
+    background: #f8f9fa; 
+    font-family: 'Gaegu', cursive;  
 }
 
+/* Styling for the main centered content */
 .centered-content {
   text-align: center; 
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  height: 100vh;
-  padding: 60px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;  
+  justify-content: center; 
+  height: 100vh; /* 100% viewport height */
+  padding: 60px; 
 }
 
+/* Header styling */
 .centered-content h1 {
-  font-size: 100px;
+  font-size: 100px; 
 }
 
+/* Paragraph styling */
 .centered-content p{
   font-size: 30px;
-  overflow-wrap: break-word;
+  overflow-wrap: break-word; /* Breaking long words */
 }
 
+/* Button styling */
 .centered-content button {
   font-size: 2.0rem;
 }
+
+/* Styling for toolbar */
 #toolbar {
   display: flex;
   justify-content: space-between;
@@ -38,23 +46,26 @@ body, html {
   position: fixed;
   top: 0;
   background-color: #eee;
-  z-index: 10;
+  z-index: 10; /* Ensuring toolbar stays on top */
   border: 3px solid #1f1e1e;
   width: 100%;
-  height: 5%;
+  height: 5%; /* 5% of viewport height */
 }
 
+/* Left and right sections of toolbar */
 .left-section, .right-section {
     display: flex;
     align-items: center;
 }
 
+/* Styling for toolbar buttons */
 .tool-btn {
     margin-right: 25px;
     font-size: 1.2em;
     padding: 10px;
 }
 
+/* Styling for slider container */
 .slider-container {
   position: absolute;
   bottom: 10px;
@@ -62,43 +73,51 @@ body, html {
   transform: translateX(-50%);
 }
 
+/* Styling for main content */
 .main-content {
   display: flex;
   padding-top: 80px;
   margin: 20px;
-  height: calc(100% - 80px);
+  height: calc(100% - 80px); /* Calculating height */
   justify-content: space-between;
   gap: 10px;
 }
 
+/* Styling for image container */
 #image-container {
-  flex: 0 0 30%;
+  flex: 0 0 30%; /* Fixed width */
   border-right: 2px solid black;
 }
 
+/* Styling for Pokemon name label */
 .pokemon-name-label {
   text-align: center;
   font-size: 1.8rem;
   margin-top: 10px;
 }
 
+/* Styling for paint and canvas */
 #paint, #canvas {
   border: 2px solid black;
   width: 256px;
   height: 256px;
 }
 
+/* Styling for Pokemon selector */
 #pokemon-selector {
   display: flex;
   flex-direction: column;
   --wired-item-selected-bg: lightgray;
   --wired-item-selected-color: black;
 }
+
+/* Styling for scrollable area */
 .scrollable {
   overflow-y: auto;
   height: 200px;
 }
-/* Responsive adjustments */
+
+/* Responsive adjustments for medium-sized devices*/
 @media (max-width: 1024px) {
     .tool-btn {
         font-size: 1em;
@@ -115,6 +134,7 @@ body, html {
     }
 }
 
+/* Responsive adjustments for small-sized devices */
 @media (max-width: 768px) {
     #toolbar {
         flex-direction: column;
