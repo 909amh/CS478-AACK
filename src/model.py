@@ -8,7 +8,7 @@ from enum import Enum
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential
 
-
+# enum class for Pokemons with corresponding indices
 class Pokemon(Enum):
     BULBASAUR = 1
     IVYSAUR = 2
@@ -174,23 +174,27 @@ if (__name__ == "__main__"):
 
     num_of_classes = len(dataset.class_names)
     print("Number of Classes: " + str(num_of_classes))
+
     # Set validation and training sizes
     train_size = int(num_of_classes)
     val_size = int(num_of_classes*.2)
     print("Train size: " + str(train_size))
     print("Val size: " + str(val_size))
 
-
+    # Split dataset into training and validation sets
     train: tf.data.Dataset = dataset
     val = dataset.take(val_size)
 
+    # Function for one-hot encoding labels
     def one_hot_encode(image, label):
         label = tf.one_hot(label, depth=151)
         return image, label
 
+    # Apply one-hot encoding to training and validation sets
     train = train.map(one_hot_encode)
     val = val.map(one_hot_encode)
-
+  
+    # Define the CNN model architecture
     model = tf.keras.models.Sequential(layers.Conv2D(64, (3,3), activation='relu', input_shape=(256, 256, 3)))
     model.add(layers.MaxPooling2D(2, 2))
     model.add(layers.Conv2D(64, (3,3), activation='relu'))
@@ -203,15 +207,16 @@ if (__name__ == "__main__"):
     model.add(layers.Dropout(0.5))
     model.add(layers.Dense(151, activation='softmax'))
 
+    # Compile the model
     model.compile(loss='categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-
+    # Train the model
     hist = model.fit(train, epochs=25, validation_data=val)
     print(hist)
 
-
+    # Plot loss and accuracy curves
     fig = plt.figure()
     plt.plot(hist.history['loss'], color='teal', label='loss')
     plt.plot(hist.history['val_loss'], color='orange', label='val_loss')
@@ -220,4 +225,6 @@ if (__name__ == "__main__"):
     fig.suptitle('Loss and Accuracy', fontsize = 20)
     plt.legend(loc='best')
     plt.show()
+
+   # Save trained model
     model.save("model.h5")
